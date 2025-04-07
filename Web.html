@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla de Posiciones - Liga</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Patrick Hand', cursive;
+      background-image: url('blank.jpg');
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #e0e7f0; /* por si no carga la imagen */
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,50,0.2);
+      max-width: 800px;
+      width: 100%;
+      border: 2px dashed #5b8fc1;
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      color: #003366;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+    }
+
+    #tabla-posiciones {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    #tabla-posiciones th {
+      background-color: rgba(0, 85, 170, 0.7);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 2px dashed #5b8fc1;
+    }
+
+    #tabla-posiciones td {
+      padding: 1rem;
+      border-bottom: 1px dashed #5b8fc1;
+      text-align: center;
+      background-color: transparent;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    #tabla-posiciones tr.visible td {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    button {
+      background-color: #0055aa;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      display: block;
+      margin: 0 auto;
+      font-family: 'Patrick Hand', cursive;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      background-color: #003366;
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    button:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>BattleOfAlgorithms  </h1>
+    <table id="tabla-posiciones">
+      <thead>
+        <tr>
+          <th>Posición</th>
+          <th>Equipo</th>
+          <th>Puntos</th>
+          <th>Partidos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1º</td>
+          <td>Real Sporting</td>
+          <td>78</td>
+          <td>38</td>
+        </tr>
+        <tr>
+          <td>2º</td>
+          <td>Atlético Verde</td>
+          <td>75</td>
+          <td>38</td>
+        </tr>
+        <tr>
+          <td>3º</td>
+          <td>CF Azul Marino</td>
+          <td>72</td>
+          <td>38</td>
+        </tr>
+        <tr>
+          <td>4º</td>
+          <td>UD Capital</td>
+          <td>68</td>
+          <td>38</td>
+        </tr>
+        <tr>
+          <td>5º</td>
+          <td>Rayo Norte</td>
+          <td>65</td>
+          <td>38</td>
+        </tr>
+      </tbody>
+    </table>
+    <button id="reveal-btn" onclick="revealPosition()">Mostrar siguiente posición</button>
+  </div>
+
+  <script>
+    const rows = document.querySelectorAll('#tabla-posiciones tbody tr');
+    const button = document.getElementById('reveal-btn');
+    let currentPosition = rows.length - 1;
+
+    rows.forEach(row => row.classList.remove('visible'));
+
+    function revealPosition() {
+      if(currentPosition >= 0) {
+        rows[currentPosition].classList.add('visible');
+        currentPosition--;
+        
+        if(currentPosition < 0) {
+          button.textContent = '¡Tabla completa!';
+          button.disabled = true;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
